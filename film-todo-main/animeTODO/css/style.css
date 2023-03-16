@@ -386,7 +386,7 @@ body{
         margin-top: auto;
         flex-shrink: 0;
         position: sticky;
-        bottom: 0;
+        bottom: 0px;
     }
     .row-comment{
         display: none;
