@@ -23,8 +23,6 @@ html.theme-1{
     --commentimg: url(../resources/comment.png);
 }
 body{
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
     font-family: 'Inter', sans-serif;
 }
 .content{
