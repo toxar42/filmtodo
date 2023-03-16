@@ -378,9 +378,6 @@ body{
         width: 75%;
         box-shadow: none;
     }
-    .point-row{
-        margin-top: 5px;
-    }
     .bottom-menu{
         display: flex;
         position: absolute;
