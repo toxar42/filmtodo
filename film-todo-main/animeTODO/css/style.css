@@ -319,9 +319,6 @@ body{
     -webkit-appearance: none;
 }
 .mobile-header{
-    width: 100%;
-    height: 8vmax;
-    border-bottom: solid 1px var(--color4);
     display: none;
 }
 .app-name{
@@ -331,8 +328,6 @@ body{
     font-weight: bold;
 }
 .bottom-menu{
-    width: 100%;
-    height: 8vmax;
     display: none;
 }
 .mobile-btn{
@@ -379,10 +374,15 @@ body{
         box-shadow: none;
     }
     .point-row{
-        margin-top: 5px;
+        width: calc(100% - 10px);
+        padding: 0 5px 0 5px;
+        height: var(--elheight);
+        gap: 5px;
     }
     .bottom-menu{
         display: flex;
+        width: 100%;
+        height: 8vmax;
         margin-top: auto;
     }
     .row-comment{
@@ -402,6 +402,9 @@ body{
     }
     .mobile-header{
         display: flex;
+        width: 100%;
+        height: 8vmax;
+        border-bottom: solid 1px var(--color4);
     }
     .green-btn{
         box-shadow: none;
