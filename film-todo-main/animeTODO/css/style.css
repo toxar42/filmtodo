@@ -383,7 +383,8 @@ body{
     }
     .bottom-menu{
         display: flex;
-        flex: 1;
+        position: absolute;
+        bottom: 0;
     }
     .row-comment{
         display: none;
