@@ -385,6 +385,7 @@ body{
         height: 8vmax;
         margin-top: auto;
         flex-shrink: 0;
+        position: sticky;
     }
     .row-comment{
         display: none;
