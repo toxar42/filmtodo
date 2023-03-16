@@ -97,7 +97,7 @@ body{
 }
 .lists{
     width: 100%;
-    height: calc(100vh - 16vmax);
+    height: 100%;
     position: relative;
     gap: var(--gap15);
     overflow: auto;
@@ -400,6 +400,14 @@ body{
         min-width: var(--elheight);
         min-height: var(--elheight);
         box-shadow: none;
+    }
+    .lists{
+        width: 100%;
+        height: calc(100vh - 16vmax);
+        position: relative;
+        gap: var(--gap15);
+        overflow: auto;
+        z-index: 20;
     }
     .mobile-header{
         display: flex;
