@@ -398,7 +398,7 @@ body{
         min-height: var(--elheight);
     }
     .row-score{
-        min-width: var(--elheight);
+        min-width: 80px;
         min-height: var(--elheight);
         box-shadow: none;
     }
