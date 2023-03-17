@@ -18,9 +18,11 @@ html.theme-1{
     --color4: #5BA199;
     --color5: #EDEDED;
     --color6: #A7BDC0;
-    --searchimg: url(../resources/search.png);
-    --plusimg: url(../resources/plus.png);
-    --commentimg: url(../resources/comment.png);
+    --searchimg: url(../resources/search1.png);
+    --commentimg: url(../resources/comment1.png);
+    --optionimg: url(../resources/option1.png);
+    --shareimg: url(../resources/share1.png);
+    --userimg: url(../resources/user1.png);
 }
 body{
     font-family: 'Inter', sans-serif;
@@ -252,6 +254,9 @@ body{
     right: 0;
     z-index: 50;
     transition: all .1s ease-in-out;
+    color: var(--color3);
+    font-size: var(--font24);
+    font-weight: bold;
 }
 .add-point:hover{
     background-color: var(--color2);
@@ -276,8 +281,9 @@ body{
 .row-name input{
     height: 100%;
     width: calc(100% - 2 * var(--gap15));
-    padding-left: var(--gap15);
-    padding-right: var(--gap15);
+    box-sizing: border-box;
+    margin-left: var(--gap15);
+    margin-right: var(--gap15);
     outline: none;
     border: none;
     background-color: var(--color2);
@@ -287,7 +293,6 @@ body{
     text-overflow: ellipsis;
     white-space: nowrap;
     font-weight: bold;
-    box-sizing: border-box;
 }
 .row-comment{
     width: var(--elheight);
@@ -297,7 +302,6 @@ body{
     background-repeat: no-repeat;
     background-size: 80%;
     background-color: var(--color2);
-    box-sizing: border-box;
 }
 .row-score{
     height: var(--elheight);
@@ -317,7 +321,6 @@ body{
     height: 100%;
     width: 100%;
     border: none;
-    box-sizing: border-box;
     outline: none;
     text-align: center;
     font-size: var(--font16);
@@ -325,6 +328,7 @@ body{
     font-weight: bold;
     background-color: var(--color2);
     -webkit-appearance: none;
+    box-sizing: border-box;
 }
 .mobile-header{
     display: none;
@@ -341,7 +345,7 @@ body{
 .mobile-btn{
     min-width: var(--elheight);
     min-height: var(--elheight);
-    border: 1px solid var(--color4);
+    /* border: 1px solid var(--color4); */
     border-radius: var(--radius10);
 }
 .mobile-list-name{
@@ -357,6 +361,40 @@ body{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+.user{
+    background: var(--userimg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-color: var(--color6);
+}
+.plus{
+    font-weight: bold;
+    color: var(--color3);
+    font-size: var(--font16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search-bottom{
+    background: var(--searchimg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70%;
+}
+.share-bottom{
+    background: var(--shareimg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 65%;
+}
+.option{
+    background: var(--optionimg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 65%;
+    background-color: var(--color6);
 }
 @media screen and (orientation: portrait)
 {   
