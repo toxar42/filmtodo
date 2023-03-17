@@ -151,7 +151,7 @@ body{
 .medium-size{
     font-size: var(--font16);
 }
-.white-btn:hover{
+.white-btn-anim:hover{
     background-color: var(--color1);
     color: var(--color2);
     font-weight: bold;
