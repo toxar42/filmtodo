@@ -431,6 +431,8 @@ body{
         height: 8vmax;
         margin-top: auto;
         flex-shrink: 0;
+        position:sticky;
+        bottom: 0px;
     }
     .row-comment{
         display: none;
