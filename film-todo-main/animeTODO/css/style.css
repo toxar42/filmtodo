@@ -4,6 +4,7 @@
 }
 html{
     --allscreen: 100vh;
+    overflow-y: scroll;
 }
 :root {
     --gap15: 15px;
@@ -475,7 +476,12 @@ body {
     -webkit-appearance: none;
     box-sizing: border-box;
 }
-
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none !important;
+}
 .mobile-header {
     display: none;
 }
@@ -821,7 +827,6 @@ body {
     body {
         min-width: 280px;
         max-height: var(--allscreen);
-        overflow-y: scroll;
     }
 
     /* был левый стал нижний бар */
