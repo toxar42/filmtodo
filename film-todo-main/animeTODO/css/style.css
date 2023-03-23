@@ -980,6 +980,10 @@ select {
         height: var(--elheight);
         width: calc(var(--elheight) * 2);
     }
+     .main-placement-field{
+        position:fixed;
+        top: 0;
+    }
 }
 
 @media screen and (max-height:600px) {
