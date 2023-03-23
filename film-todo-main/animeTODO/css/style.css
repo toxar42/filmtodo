@@ -484,6 +484,7 @@ select {
 
 select::-ms-expand {
     display: none;
+    opacity: .01;
 }
 
 .mobile-header {
