@@ -481,6 +481,11 @@ select {
     -moz-appearance: none;
     appearance: none;
 }
+
+select::-ms-expand {
+    display: none;
+}
+
 .mobile-header {
     display: none;
 }
