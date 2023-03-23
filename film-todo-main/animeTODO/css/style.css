@@ -4,6 +4,7 @@
 }
 html{
     --allscreen: 100vh;
+    overflow-y: scroll;
 }
 :root {
     --gap15: 15px;
@@ -474,6 +475,7 @@ body {
     background-color: var(--point);
     -webkit-appearance: none;
     box-sizing: border-box;
+    align-self: center;
 }
 select {
     -webkit-appearance: none;
@@ -980,10 +982,7 @@ select {
         height: var(--elheight);
         width: calc(var(--elheight) * 2);
     }
-     .main-placement-field{
-        position:fixed;
-        top: 0;
-    }
+
 }
 
 @media screen and (max-height:600px) {
