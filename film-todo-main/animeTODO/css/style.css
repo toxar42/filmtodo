@@ -827,11 +827,9 @@ select {
 
     body {
         min-width: 280px;
+        max-height: var(--allscreen);
     }
-    html{
-    --allscreen: 100vh;
-    overflow-y: scroll;
-    }
+
     /* был левый стал нижний бар */
     .left-bar {
         display: flex;
