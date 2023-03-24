@@ -120,6 +120,7 @@ html.theme-3 {
 
 body {
     font-family: 'Inter', sans-serif;
+    overflow: hidden;
 }
 
 .content {
