@@ -4,6 +4,7 @@
 }
 html{
     --allscreen: 100vh;
+    overflow: hidden;
 }
 :root {
     --gap15: 15px;
