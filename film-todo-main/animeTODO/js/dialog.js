@@ -1,5 +1,6 @@
-import { checkMenu, user_id } from './script.js';
+import { checkMenu, findScores, findStatus, user_id } from './script.js';
 import * as reqest from './request.js';
+// import { json } from 'stream/consumers';
 
 // Создание окна
 export function dialogWindow(text, btnfunc, exit) {
@@ -8,7 +9,7 @@ export function dialogWindow(text, btnfunc, exit) {
     let dialogFrame = document.getElementById('dialog-frame');
 
     dialogFrame.insertAdjacentHTML('afterbegin', `<span class="text-message" id="text-message">${text}</span>
-    <input type="text" id="info-field" value="">
+    <input type="text" id="info-field" value="" autofocus>
     <div class="display-row-cent-spbetw btns">
         <div class="share text-center green-btn" id="ok">Ok</div>
         <div class="share text-center green-btn" id="cancel"}">Cancel</div>
@@ -99,6 +100,8 @@ export function addNewPoint() {
                                                         </div>
                                                     </div>`);
         checkMenu();
+        findScores();
+        findStatus();
         // обращение к бд и запись нового поинта в бд  (я рот ее ебал)
         reqest.getRequest(reqest.bd_url + `/${user_id}`).then(resp => {
             let all_data;
@@ -147,4 +150,81 @@ export function addNewPoint() {
     else {
         cancel();
     }
+}
+
+export function setBgImage() {
+    let imageUrl = document.getElementById('info-field').value;
+    if (imageUrl != '') {
+        localStorage.setItem('bg', JSON.stringify(imageUrl));
+        // подгрузка фона
+        let bg = document.getElementById('main-field');
+        bg.style.background = `url(${localStorage.getItem('bg')})`;
+        bg.style.backgroundPosition = 'center';
+        bg.style.backgroundSize = 'cover';
+        cancel();
+    }
+    else {
+        cancel();
+    }
+}
+
+export function editListName() {
+    let listName = document.getElementById('list-name').innerText;
+    listName = listName.replace(/\n/g, '');
+    let newListName = document.getElementById('info-field').value;
+    let all_lists;
+    if (listName != '') {
+        reqest.getRequest(reqest.bd_url + `/${user_id}`).then(resp => {
+            let data;
+            all_lists = resp['lists'];
+            for (let i = 0; i < resp['lists'].length; i++) {
+                if (resp['lists'][i]['name'] == listName) {
+                    data = resp['lists'][i]['data'];
+                    all_lists[i]['name'] = newListName;
+                    break;
+                }
+            }
+
+            let new_list_name = {
+                lists: all_lists
+            }
+            reqest.sendRequest(reqest.bd_url + `/${user_id}`, 'PUT', new_list_name);
+
+            let names = document.querySelectorAll('#list-name');
+            let menus = document.querySelectorAll('.none-active-point');
+            names.forEach(name => {
+                name.textContent = newListName;
+            })
+            menus.forEach(menu => {
+                if (menu.innerText == listName) {
+                    menu.childNodes[1].innerText = newListName;
+                }
+            });
+        });
+        cancel();
+    }
+    else {
+        cancel();
+    }
+}
+
+export function deleteList() {
+    reqest.getRequest(reqest.bd_url + `/${user_id}`).then(resp => {
+        let listName = document.getElementById('list-name').innerText;
+        listName = listName.replace(/\n/g, '');
+        let new_lists = resp['lists'];
+        for (let i = 0; i < resp['lists'].length; i++) {
+            if (resp['lists'][i]['name'] == listName) {
+                new_lists.splice(i, 1);
+                break;
+            }
+        }
+
+        let new_list_array = {
+            lists: new_lists
+        }
+        reqest.sendRequest(reqest.bd_url + `/${user_id}`, 'PUT', new_list_array);
+        
+        setTimeout(()=> {window.location.reload();}, 1000);
+    })
 }

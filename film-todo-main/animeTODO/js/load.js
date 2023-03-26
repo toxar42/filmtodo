@@ -1,8 +1,10 @@
 import * as reqest from './request.js';
-import { checkMenu, user_id } from './script.js';
+import { checkMenu, user_id, findScores, findStatus } from './script.js';
 
 export function loadlists() {
     reqest.getRequest(reqest.bd_url + `/${user_id}`).then(resp => {
+        let login = document.querySelector('.font-bold-24');
+        login.textContent = resp['name'];
         let menu_lists = document.getElementById('menu');
         menu_lists.innerHTML = '';
         for (let i = 0; i < resp['lists'].length; i++) {
@@ -71,5 +73,7 @@ export function loadpoints() {
                 break;
             }
         }
+        findScores();
+        findStatus();
     });
 }

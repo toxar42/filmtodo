@@ -2,6 +2,10 @@ import * as th from './themes.js';
 import * as reqest from './request.js';
 import * as dialog from './dialog.js';
 import * as load from './load.js';
+import * as search from './search.js';
+import * as sort from './sort.js';
+import * as edit from './edit.js';
+
 
 document.getElementById('lists').onclick = () => { th.rem(); }
 // выбор темы
@@ -16,7 +20,7 @@ document.querySelectorAll('.e').forEach(element => {
 });
 // Меню
 
-export let user_id = '1';
+export let user_id = localStorage.getItem('ID');
 
 load.loadlists();
 
@@ -94,8 +98,15 @@ window.onload = function () {
     // document.documentElement.style.height = window.outerHeight + 'px';
     document.documentElement.style.cssText = `--allscreen: ${window.innerHeight}px`;
     setTimeout(window.scrollTo(0, 1), 10);
+    // Смена темы при загрузке
     let loc = localStorage.getItem('Theme');
     th.change_theme(parseInt(loc, 10));
+    // подгрузка фона
+    let bg = document.getElementById('main-field');
+    bg.style.background = `url(${localStorage.getItem('bg')})`;
+    bg.style.backgroundPosition = 'center';
+    bg.style.backgroundSize = 'cover';
+    // load.load_login();
 }
 
 window.addEventListener('resize', () => {
@@ -103,69 +114,34 @@ window.addEventListener('resize', () => {
     setTimeout(window.scrollTo(0, 1), 10);
 })
 
-// мобильный фокус поиск
-let mobile_search = document.querySelector('.search-bottom');
-
-mobile_search.onclick = () => {
-    let mobile_input = document.getElementById('mobile-search-form');
-    mobile_search.classList.add('active-search');
-    mobile_input.style.width = '35vmin';
-    setTimeout(() => { mobile_input.focus(); }, 500);
-
-    mobile_input.addEventListener('focusout', () => {
-        mobile_input.style.width = '0';
-        mobile_input.removeAttribute('autofocus');
-        mobile_search.classList.remove('active-search');
-    })
+search.mobileAnim();
+search.deskSearch();
+search.mobileSearch();
+// Сортировка
+document.getElementById('sort').onclick = () => {
+    sort.reverseSort();
 }
-
-// desktop поиск
-let search = document.getElementById("search-field");
-search.oninput = function () {
-    let lists = document.querySelectorAll("#point-name");
-    let search_val = document.getElementById("search-field");
-    if (search_val.value != '') {
-        lists.forEach(list => {
-            if (list.value.toLowerCase().search(search_val.value.toLowerCase()) != -1) {
-                list.parentElement.parentElement.style.display = "flex";
-            }
-            else {
-                list.parentElement.parentElement.style.display = "none";
-            }
-        });
-    }
-    else {
-        lists.forEach(list => {
-            list.parentElement.parentElement.style.display = "flex";
+// переименовать лист
+document.getElementById('rename').onclick = () => {
+    dialog.dialogWindow('Измените название листа', dialog.editListName, dialog.cancel);
+}
+// удалить лист
+document.getElementById('del').onclick = () => {
+    dialog.deleteList();
+}
+// изменить оценку
+export function findScores() {
+    document.querySelectorAll('#score').forEach(element => {
+        element.addEventListener('change',() => {
+            edit.editScore(element);
         })
-    }
+    });
 }
-
-// mobile поиск
-let search_mobile = document.getElementById("mobile-search-form");
-search_mobile.oninput = function () {
-    let lists_mobile = document.querySelectorAll("#point-name");
-    let search_val = document.getElementById("mobile-search-form");
-
-    if (search_val.value != '') {
-        lists_mobile.forEach(list => {
-            if (list.value.toLowerCase().search(search_val.value.toLowerCase()) != -1) {
-                list.parentElement.parentElement.style.display = "flex";
-            }
-            else {
-                list.parentElement.parentElement.style.display = "none";
-            }
-        });
-    }
-    else {
-        lists_mobile.forEach(list => {
-            list.parentElement.parentElement.style.display = "flex";
+// Изменить статус
+export function findStatus() {
+    document.querySelectorAll('#status').forEach(element => {
+        element.addEventListener('change',() => {
+            edit.editStatus(element);
         })
-    }
+    });
 }
-document.addEventListener('touchmove', function(event) {
-  event = event.originalEvent || event;
-  if(event.scale !== 1) {
-    event.preventDefault();
-  } 
-}, false);
