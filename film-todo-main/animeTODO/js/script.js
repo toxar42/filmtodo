@@ -144,6 +144,3 @@ export function findStatus() {
         })
     });
 }
-If (user_id == ''){
-    window.location.replace(`../html/loginpage.html`);
-    };
