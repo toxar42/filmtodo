@@ -95,9 +95,6 @@ function handleTouchMove(event) {
 }
 
 window.onload = function () {
-    If (user_id == null){
-    window.location.replace(`../html/loginpage.html`);
-    };
     // document.documentElement.style.height = window.outerHeight + 'px';
     document.documentElement.style.cssText = `--allscreen: ${window.innerHeight}px`;
     setTimeout(window.scrollTo(0, 1), 10);
@@ -147,3 +144,6 @@ export function findStatus() {
         })
     });
 }
+If (user_id == ''){
+    window.location.replace(`../html/loginpage.html`);
+    };
