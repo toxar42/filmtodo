@@ -95,7 +95,7 @@ function handleTouchMove(event) {
 }
 
 window.onload = function () {
-    If (user_id == ''){
+    If (user_id = ''){
     window.location.replace(`../html/loginpage.html`);
     };
     // document.documentElement.style.height = window.outerHeight + 'px';
