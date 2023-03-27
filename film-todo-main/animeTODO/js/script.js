@@ -95,6 +95,9 @@ function handleTouchMove(event) {
 }
 
 window.onload = function () {
+    If (user_id == ''){
+    window.location.replace(`../html/loginpage.html`);
+    };
     // document.documentElement.style.height = window.outerHeight + 'px';
     document.documentElement.style.cssText = `--allscreen: ${window.innerHeight}px`;
     setTimeout(window.scrollTo(0, 1), 10);
@@ -106,7 +109,6 @@ window.onload = function () {
     bg.style.background = `url(${localStorage.getItem('bg')})`;
     bg.style.backgroundPosition = 'center';
     bg.style.backgroundSize = 'cover';
-    // load.load_login();
 }
 
 window.addEventListener('resize', () => {
