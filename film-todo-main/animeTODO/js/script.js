@@ -106,8 +106,8 @@ window.onload = function () {
     bg.style.background = `url(${localStorage.getItem('bg')})`;
     bg.style.backgroundPosition = 'center';
     bg.style.backgroundSize = 'cover';
-    If (localStorage.getItem('ID')==''){
-    
+    if (localStorage.getItem('ID')==''){
+    window.location.replace(`../html/loginpage.html`); 
     }
 }
 
