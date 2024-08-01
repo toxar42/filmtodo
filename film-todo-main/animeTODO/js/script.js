@@ -6,8 +6,8 @@ import * as search from './search.js';
 import * as sort from './sort.js';
 import * as edit from './edit.js';
 
-
 document.getElementById('lists').onclick = () => { th.rem(); }
+
 // выбор темы
 document.querySelectorAll('.e').forEach(element => {
     element.onclick = () => {
@@ -20,7 +20,7 @@ document.querySelectorAll('.e').forEach(element => {
 });
 // Меню
 
-export let user_id = localStorage.getItem('ID');
+export let user_id = parseInt(localStorage.getItem('ID'), 10);
 
 load.loadlists();
 
@@ -56,7 +56,12 @@ btnAddList.onclick = () => {
 // кнопки добавления поинта
 document.querySelectorAll('#AddPoint').forEach(element => {
     element.onclick = () => {
-        dialog.dialogWindow('Название поинта', dialog.addNewPoint, dialog.cancel);
+        if (document.querySelectorAll('.none-active-point').length == 0) {
+            dialog.dialogWindow('Сначала создайте список', dialog.addNewList, dialog.cancel);
+        }
+        else {
+            dialog.dialogWindow('Название поинта', dialog.addNewPoint, dialog.cancel);
+        }
     }
 })
 
@@ -106,8 +111,9 @@ window.onload = function () {
     bg.style.background = `url(${localStorage.getItem('bg')})`;
     bg.style.backgroundPosition = 'center';
     bg.style.backgroundSize = 'cover';
-    if (localStorage.getItem('ID') == null){
-    window.location.replace(`../html/loginpage.html`); 
+
+    if (localStorage.getItem('ID') == null) {
+        window.location.replace('../html/loginpage.html');
     }
 }
 
@@ -131,10 +137,22 @@ document.getElementById('rename').onclick = () => {
 document.getElementById('del').onclick = () => {
     dialog.deleteList();
 }
+// изменить статус
+export function findComment() {
+    document.querySelectorAll('.row-comment').forEach(element => {
+        element.addEventListener('click', () => {
+            edit.openComment(element);
+        })
+    })
+}
+document.getElementById('save-comm').onclick = () => {
+    edit.closeComment();
+}
+
 // изменить оценку
 export function findScores() {
     document.querySelectorAll('#score').forEach(element => {
-        element.addEventListener('change',() => {
+        element.addEventListener('change', () => {
             edit.editScore(element);
         })
     });
@@ -142,8 +160,22 @@ export function findScores() {
 // Изменить статус
 export function findStatus() {
     document.querySelectorAll('#status').forEach(element => {
-        element.addEventListener('change',() => {
+        element.addEventListener('change', () => {
             edit.editStatus(element);
         })
     });
+}
+
+document.querySelector('.close').onclick = function () {
+    document.querySelector('.profile').style.display = 'none';
+}
+document.querySelector('.name-ava-left').onclick = function () {
+    document.querySelector('.profile').style.display = 'flex';
+}
+document.querySelector('.user').onclick = function () {
+    document.querySelector('.profile').style.display = 'flex';
+}
+document.querySelector('.out').onclick = function () {
+    localStorage.removeItem('ID');
+    window.location.reload();
 }

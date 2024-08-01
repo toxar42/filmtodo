@@ -47,39 +47,34 @@ function create_new_acc() {
     let f_password = document.login.password.value;
     let s_password = document.login.secpassword.value;
     if (f_password == s_password) {
-        getRequest(bd_url).then(body => {
-            let flag = true;
-            if (body.length != 0) {
-                for (let i = 0; i < body.length; i++) {
-                    if (log == body[i]['login']) {
-                        alert('Данный логин уже существует');
-                        flag = true;
-                        break;
-                    }
-                    else {
-                        flag = false;
-                    }
-                }
-                if (!flag) {
-                    let body = {
-                        login: log,
-                        password: f_password,
-                        name: us_name
-                    }
-                    sendRequest(bd_url, 'POST', body);
-                    setTimeout(() => { window.location.replace(`../html/index.html`); }, 500);
+        getRequest(bd_url).then(data => {
+            let flag = false;
+            for (let i = 0; i < data.length; i++) {
+                if (log == data[i]['login']) {
+                    alert('Данный пользователь уже существует');
+                    flag = true;
+                    break;
                 }
             }
-            else {
-                let body = {
-                    login: log,
-                    password: f_password,
-                    name: us_name
-                }
+            let body = {
+                login: log,
+                password: f_password,
+                lists: [{
+                    name: 'First list',
+                    data: [{
+                        name: 'You may remove or rename this list or check some info in comment!',
+                        score: 10,
+                        comment: 'some info',
+                        status: 1
+                    }]
+                }],
+                name: us_name
+            }
+            if (!flag) {
                 sendRequest(bd_url, 'POST', body);
-                setTimeout(() => { window.location.replace(`../html/index.html`); }, 500); 
+                login();
             }
-        })
+        });
     }
     else {
         alert('Пароли не совпаают');
@@ -90,30 +85,23 @@ function create_new_acc() {
 function check_acc() {
     getRequest(bd_url).then(profiles => {
         let log = document.login.log.value;
-        let index = 0;
         let flag = false;
         for (let i = 0; i < profiles.length; i++) {
             if (log == profiles[i]['login']) {
                 flag = true;
-                index = i;
+                let password = document.login.password.value;
+                if (password == profiles[i]['password']) {
+                    localStorage.setItem('ID', JSON.stringify(parseInt(profiles[i]['id']), 10));
+                    window.location.replace(`../html/index.html`);
+                }
+                else {
+                    alert('Неверный пароль');
+                }
                 break;
             }
-            else {
-                flag = false;
-            }
         }
-        if (flag) {
-            let password = document.login.password.value;
-            if (password == profiles[index]['password']) {
-                window.location.replace(`../html/index.html`);
-                localStorage.setItem('ID',JSON.stringify(index + 1));
-            }
-            else {
-                alert('Неверный пароль');
-            }
-        }
-        else {
-            alert('Такого пользователя нет');
+        if (!flag) {
+            alert('Неверный логин или пароль');
         }
     });
     return false;
